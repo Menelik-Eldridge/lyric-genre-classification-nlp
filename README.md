@@ -2,7 +2,7 @@
 
 ***Predicting the music genre of a song based on its lyrics*** by implementing TensorFlow/Keras to develop a NLP pipeline that uses: neural text vectorization, neural network classification and word embedding techniques. 
 
-This project demonstrates how unstructured textual data (in this case: song lyrics) can be converted into numerical feature representations in order to train a neural model capable of classifying music genres based on song lyrics
+This project demonstrates how unstructured textual data (in this case: song lyrics) can be converted into numerical feature representations in order to train a neural model capable of classifying the correct music genres based on the songs lyrics
 
 ---
 
