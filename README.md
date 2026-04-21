@@ -1,25 +1,8 @@
-# NLP Lyric Identifier: Genre Classification from Song Lyrics
+# NLP Lyric Genre Identifier
 
-***Predicting the music genre of a song based on its lyrics*** by implementing TensorFlow/Keras to develop a NLP pipeline that uses: neural text vectorization, neural network classification and word embedding techniques. 
+Predicting a song's genre (Hip-Hop, Pop, or Rock) from its lyrics using an NLP pipeline built with TensorFlow/Keras.
 
-This project demonstrates how unstructured textual data (in this case: song lyrics) can be converted into numerical feature representations in order to train a neural model capable of classifying the correct music genres based on the songs lyrics
-
----
-
-## Project Overview
-
-Song lyrics contain stylistic patterns (in particular: words used [text vectorization] and their definition [word embedding]) that often correlate with musical genres.  
-This project builds a machine learning system that learns those patterns and predicts a song's genre from its lyrics.
-
-The pipeline performs:
-
-• Text preprocessing  
-• Vocabulary construction  
-• Text vectorization
-• word embedding
-• Neural network classification  
-• Model evaluation on validation and test datasets  
-
+Three models of increasing sophistication are implemented, demonstrating progression from a simple baseline to transfer learning with fine-tuned word embeddings.
 Example input:
 
 "I'm standing on the corner with my guitar tonight"
