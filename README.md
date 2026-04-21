@@ -16,43 +16,36 @@ Pop
 
 ## Dataset
 
-The datasets contain song lyrics labeled with their corresponding genre.
+Song lyrics labeled with genre, sourced from the MIT XPro Lyric Genre dataset.
 
-| Column | Description |
-|------|------|
-| Lyric | Song lyric text |
-| Genre | Target genre label |
+| Split | File | Samples |
+|-------|------|---------|
+| Train | `lyric_genre_train.csv` | 48,991 |
+| Validation | `lyric_genre_val.csv` | — |
+| Test | `lyric_genre_test.csv` | — |
 
-Example:
-
-| Lyric | Genre |
-|------|------|
-| "I got the horses in the back..." | Country |
-| "We will rock you..." | Rock |
-| "Drop it like it's hot..." | Hip-Hop |
-
-There are 3 datasets:
-• Training set  
-• Validation set  
-• Test set  
-
-This allows the model to be trained and evaluated on unseen data.
-
+**Genre distribution (train set):** Rock 54.9% · Pop 29.5% · Hip-Hop 15.5%
 ---
 
-## System Architecture
+## Pipeline Overview
 
-The pipeline follows the following structure:
-
-Raw Lyrics  
-↓  
-Text Vectorization  
-↓  
-Multi-Hot Feature Representation  
-↓  
-Feedforward Neural Network  
-↓  
-Genre Prediction  
+```
+Raw Lyrics
+↓
+Text Vectorization (Keras TextVectorization)
+↓
+┌─────────────────────────────────────────────────────┐
+│ Model 1         │ Model 2          │ Model 3         │
+│ Multi-Hot       │ GloVe Embeddings │ GloVe Embeddings│
+│ Encoding        │ (Frozen)         │ (Fine-tuned)    │
+└─────────────────────────────────────────────────────┘
+↓
+GlobalAveragePooling1D (Models 2 & 3)
+↓
+Feedforward Neural Network
+↓
+Genre Prediction (softmax, 3 classes)
+```
 
 ---
 
