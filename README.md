@@ -72,85 +72,29 @@ Genre Prediction
 
 ---
 
-## 1. Target Encoding
+## Models
 
-The genre labels are converted into **one-hot encoded vectors**.
+### Model 1 — Bag of Words Baseline
 
-| Genre | Encoded Vector |
-|------|------|
-| Country | [1,0,0] |
-| Rock | [0,1,0] |
-| Hip-Hop | [0,0,1] |
+Lyrics are vectorized into a 5,000-dimensional multi-hot binary vector. Each position represents a vocabulary word — 1 if present in the lyric, 0 if not. Word order and frequency are discarded.
 
-This allows the neural network to perform **multi-class classification using softmax**.
+**Architecture:** `Input(5000)` → `Dense(8, relu)` → `Dense(3, softmax)`
 
 ---
 
-## 2. Text Vectorization
+### Model 2 — Transfer Learning: Frozen GloVe Embeddings
 
-Lyrics are converted into numerical feature vectors using:
+Pre-trained GloVe vectors (Stanford NLP, 6B tokens, 100 dimensions) are loaded as the embedding layer with `trainable=False`. The model borrows semantic word knowledge without modifying it.
 
-keras.layers.TextVectorization
-
-The vectorization layer:
-
-• Scans the training corpus  
-• Builds a vocabulary of the **5,000 most frequent words**  
-• Assigns each word a numeric index  
-• Maps unknown words to an **UNK token**
-
-Example lyric:
-
-"I love my guitar tonight"
-
-Becomes a **multi-hot vector** where each vocabulary word present in the lyric is marked with a `1`.
-
-Example representation (simplified):
-
-[0,0,1,0,1,0,0,1,...]
-
-This creates a **5,000-dimensional sparse feature vector** for each lyric.
+**Architecture:** `Input` → `Embedding(GloVe, frozen)` → `GlobalAveragePooling1D` → `Dense(8)` → `Dropout(0.5)` → `Dense(3, softmax)`
 
 ---
 
-## 3. Multi-Hot Text Representation
+### Model 3 — Transfer Learning: Fine-tuned GloVe Embeddings
 
-Instead of using sequences, the model uses **multi-hot encoding**, which represents each lyric by the presence of words in the vocabulary.
+Same architecture as Model 2, but with `trainable=True` on the embedding layer. Backpropagation updates the GloVe vectors during training, adapting word representations to the lyric domain.
 
-Advantages:
-
-• Efficient representation of text features  
-• Works well with feedforward networks  
-• Captures word presence without requiring sequence modeling  
-
----
-
-## 4. Genre Classification Model
-
-The classifier is a **feedforward neural network** built using TensorFlow/Keras.
-
-Architecture:
-
-Input: multi-hot lyric vector (5000 features)  
-↓  
-Dense Layer  
-↓  
-Dropout Regularization  
-↓  
-Softmax Output Layer  
-
-The output layer produces probabilities for each genre class.
-
-Example output:
-
-[0.02, 0.91, 0.07]
-
-Which corresponds to:
-
-Rock
-
----
-
+**Architecture:** `Input` → `Embedding(GloVe, fine-tuned)` → `GlobalAveragePooling1D` → `Dense(8)` → `Dropout(0.5)` → `Dense(3, softmax)`
 ## 5 Results
 
 The model was evaluated on a seperate test dataset using model.evaluate().
@@ -262,12 +206,3 @@ Pop
 
 ---
 
-## Future Improvements
-
-Potential extensions include:
-
-• Word embeddings (Word2Vec / GloVe)  
-• Transformer-based models (BERT)  
-• Sequence models (LSTM / GRU)  
-• Attention mechanisms for lyric interpretation  
-• Larger vocabularies and dataset expansion  
