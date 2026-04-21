@@ -16,7 +16,7 @@ The pipeline performs:
 • Text preprocessing  
 • Vocabulary construction  
 • Text vectorization
-word embedding
+• word embedding
 • Neural network classification  
 • Model evaluation on validation and test datasets  
 
@@ -26,7 +26,7 @@ Example input:
 
 Predicted output:
 
-Country
+Pop
 
 ---
 
@@ -254,11 +254,11 @@ Implemented training, validation, and test dataset separation to properly evalua
 
 Input lyric:
 
-"Got my boots and my truck tonight"
+"I will party tonight until the sun comes up"
 
 Model prediction:
 
-Country
+Pop
 
 ---
 
