@@ -42,8 +42,6 @@ Genre Prediction (softmax, 3 classes)
 
 ---
 
----
-
 ## Models
 
 ### Model 1 — Bag of Words Baseline
