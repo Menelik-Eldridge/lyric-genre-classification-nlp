@@ -111,3 +111,7 @@ Python · TensorFlow · Keras · NumPy · Pandas · Matplotlib · GloVe (Stanfor
 - Applying transfer learning with pre-trained word embeddings
 - Fine-tuning embeddings to adapt to a specific text domain
 - Evaluating model progression across train / validation / test splits
+
+## What This Project Demonstrates
+
+- creating an embedding matrix
