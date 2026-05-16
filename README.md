@@ -8,7 +8,7 @@ Three models of increasing sophistication are implemented, demonstrating progres
 
 ## Dataset
 
-Song lyrics labeled with genre, sourced from the MIT XPro Lyric Genre dataset.
+Song lyrics labeled with genre, sourced from the Lyric Genre dataset.
 
 | Split | File | Samples |
 |-------|------|---------|
